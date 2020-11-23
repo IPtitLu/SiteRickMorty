@@ -76,13 +76,13 @@
             <p class="text-center">Nombre de personnages de la série : {{rick.count}}</p>
         </div>
     </div>
-    <div>
-
+    <div ng-controller="RickMortyChar">
+        <button class="btn btn-dark" ng-click="prec(1);init();" id="prec"> Prec</button>
+        
+        <button class="btn btn-dark" ng-click="suiv(1);init();" id="suiv"> Next</button>
         
     </div>
-    <button class="btn btn-dark" ng-click="click(1)" id="prec"> Prec</button>
-
-    <button class="btn btn-dark" ng-click="click(2)" id="suiv"> Next</button>
+    
  
 
     <div ng-controller="RickMortyChar">

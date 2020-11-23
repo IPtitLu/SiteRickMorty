@@ -1,55 +1,47 @@
 var rickMortyApp = angular.module('RickMorty', []);
 
-
+var int = 1;
+var next = '?page=';
 
 rickMortyApp.controller('RickMortyChar',
     function rickMortyController($scope, $http) {
 
-        $scope.click = function click($test) {
-
-        console.log('here');
-
-        var actu = parseInt(0);
-        var add = parseInt(1);
-        var actu1 = parseInt(0);
-        var button = $test;
-        var next = '?page=';
-        console.log('avant le if ',actu, add)
-        console.log(button);
-
-        if( button == 2  && (actu >= 0)){
-            next = next;
-            parseInt(actu1) = parseInt(actu) + parseInt(add);
-            next = next + actu1;
-            console.log('actu valeur Suiv:', actu1, 'next valeur :', next );
-        } 
-        if (button == 1 && (actu >= 0)) {
+        
+        $scope.suiv = function suiv($test) {
             next = '?page=';
-            actu1 = 0;
-            next = next + actu1;
-            console.log('actu valeur Prec:', actu1, 'next valeur :', next );
-        } 
-        if (button == 1 && (actu < 0)){
-            actu1 = 0;
-            next = '?page=';
-            console.log('next valeur :', next );
+            int = int + $test; 
+            next = next + int;
+            console.log(next);
+        }
+
+        $scope.prec = function prec($test) {
+            if(int >2) {
+                next = '?page=';
+                int = int - $test;
+                next = next + int;
+            } else if (int <= 3) {
+                next = '';
+            } else {
+                alert("error");
+            }
+            console.log(next);
+            
         }
         
-        
-        }
+
+
         
         $scope.init = function init() {
-            $http.get('https://rickandmortyapi.com/api/character/')
+            $http.get('https://rickandmortyapi.com/api/character/' + next)
                 .then(function(response) {
                         $scope.rick = response.data.info;
                         $scope.morty = response.data.results;
-
+                        
                 });
         };
 
     $scope.init();
-
-}
+    }
 
 );
 
